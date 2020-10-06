@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funciones en JS</title>
+</head>
+<body>
+    
+    <script>
+        /* ------------------------------------------------------- */
+        /*              VARIABLES Y TIPOS DE DATOS                 */
+        /* ------------------------------------------------------- */
+        //1) Tipo primitivos (number, boolean, string) -> Copia X Valor
+        //2) Tipo Objeto (array, object, function)     -> Copia X Referencia
+
+        console.log('\n/* VARIABLES Y TIPOS DE DATOS */')
+        //1)
+        //tipo number
+        var an = 1
+        var bn = an
+        an = 10
+        console.log(an, typeof an)
+        console.log(bn, typeof bn)
+
+        //tipo boolean
+        var ab = true
+        var bb = ab
+        ab = false
+        console.log(ab, typeof ab)
+        console.log(bb, typeof bb)
+
+        //tipo string
+        var as = 'Hola'
+        var bs = as
+        as = 'Mundo'
+        console.log(as, typeof as)
+        console.log(bs, typeof bs)
+
+        //2)
+        //tipo array
+        var aa = [1,2,3]
+        var ba = aa
+        aa[0] = 11
+        console.log(aa, typeof aa, Array.isArray(aa))
+        console.log(ba, typeof ba, Array.isArray(ba))
+
+        //tipo object
+        var ao = {x:1}
+        var bo = ao
+        ao.x = 11
+        console.log(ao, typeof ao, Array.isArray(ao))
+        console.log(bo, typeof bo, Array.isArray(bo))
+
+
+        /* ------------------------------------------------------- */
+        /*             FUNCIONES CONSTRUCTORAS EN JS               */
+        /* ------------------------------------------------------- */
+
+        console.log('\n/* TIPOS DE DATOS APLICADOS EN FUNCIONES */')
+        //1) Tipo primitivos (number, boolean, string) -> Copia X Valor
+        //2) Tipo Objeto (array, object, function)     -> Copia X Referencia
+
+        //1)
+        var fecha = '2/9/2020'
+        function agregarHoraAfecha1(f) {
+            f = f + ' 20:24:00'
+            return f
+        }
+        console.log(fecha)
+        let fechayHora = agregarHoraAfecha1(fecha)
+        console.log(fechayHora)
+        console.log(fecha)
+
+        //2)
+        var fechaObj = {f: '2/9/2020'}
+        function agregarHoraAfecha2(fobj) {
+            let clave = 'f'
+            fobj[clave] = fobj[clave] + ' 20:24:00' //notación corchete (con variable)
+            //fobj['f'] = fobj['f'] + ' 20:24:00'   //notación corchete
+            //fobj.f = fobj.f + ' 20:24:00'         //notación punto
+            return fobj
+        }
+        console.log(fechaObj)
+        let fechayHoraObj = agregarHoraAfecha2(fechaObj)
+        console.log(fechayHoraObj)
+        console.log(fechaObj)
+
+        /* ------------------------------------------------------------------- */
+
+        console.log('\n/* FUNCIONES CONSTRUCTORAS */')
+
+        console.log('\n/* Las funciones en JS son objetos */')
+        function foo() {
+            console.log('Soy foo')
+        }
+        foo()
+        console.log(foo)
+        console.dir(foo)
+        console.dir({})
+
+        foo.x = true
+        console.log(foo.x)
+
+        /* ----------------------------------------------------- */
+        console.log('\n/* Las funciones en JS son variadicas */')
+        function suma(a=0,b=0) { //valores de los parametros por default
+            console.log(a,b)
+            return a + b
+        }
+        console.log(suma(5,6,7))
+
+        /* ----------------------------------------------------- */
+        console.log('\n/* Las funciones en JS tiene ámbito ó scope */')
+
+        var global = 'global'
+        function foo2(arg2) {
+            var local2 = 'local2'
+            console.log(global, local2, arg2)//, arg3) //, local3) -> error de scope
+        }
+
+        function foo3(arg3) {
+            var local3 = 'local3'
+            console.log(global, local3, arg3)//), arg2)//, local2) -> error de scope
+        }
+
+        console.log(global)
+        foo2('arg2')
+        foo3('arg3')
+        //console.log(local2)
+        //console.log(local3)
+        //console.log(arg2)
+        //console.log(arg3)
+
+    </script>
+
+</body>
+</html>

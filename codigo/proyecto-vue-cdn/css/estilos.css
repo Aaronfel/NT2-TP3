@@ -1,0 +1,31 @@
+h1 {
+    color: blue;
+}
+
+h2 {
+    color: green;
+}
+
+h4 {
+    color: purple;
+}
+
+h5 {
+    color: crimson;
+}
+
+h5 u {
+    color: brown;
+}
+
+.jumbotron {
+    background-color: rgb(221, 222, 223);
+}
+
+hr {
+    background-color: #999;
+}
+
+.table td, .table th {
+    vertical-align: middle;
+}

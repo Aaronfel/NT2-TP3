@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String/Array Methods</title>
+</head>
+<body>
+    
+    <script>
+
+        /* ------------------------------------------------------- */
+        /*                     STRING METHODS                      */
+        /* ------------------------------------------------------- */
+        //https://www.w3schools.com/js/js_string_methods.asp
+        //https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/String/prototype
+
+        console.log('/* ----- STRING METHODS ----- */')
+        
+        console.log('\n/* Trim */')
+        let miStr = '        Hola           '
+        console.log(miStr, miStr.length)
+        let miStrSinEspacios = miStr.trim()
+        console.log(miStrSinEspacios, miStrSinEspacios.length)
+
+        console.log('\n/* CharAt - Slice */')
+        let nombre = 'hOracio'
+        let nombreNormalizado = nombre.charAt(0).toUpperCase() + nombre.slice(1).toLowerCase()
+        console.log(nombre)
+        console.log(nombreNormalizado)
+
+        console.log('\n/* Split */')
+        let texto = 'Hola mundo como están'
+        let texto2array = texto.split(' ')
+        console.log(texto)
+        console.log(texto2array)
+
+        /* ------------------------------------------------------- */
+        /*                     ARRAY METHODS                       */
+        /* ------------------------------------------------------- */
+        //https://www.w3schools.com/js/js_array_methods.asp
+        //https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/prototype
+
+        console.log('/* ----- ARRAY METHODS ----- */')
+        
+        console.log('\n/* Reverse */')
+        console.log(texto2array)
+        texto2array.reverse()
+        console.log(texto2array)
+
+        console.log('\n/* Push */')
+        let miArray = [1,2,3,4,5]
+        console.log(miArray)
+        miArray.push(6)
+        console.log(miArray)
+
+        console.log('\n/* Unshift */')
+        miArray = [1,2,3,4,5]
+        console.log(miArray)
+        miArray.unshift(6)
+        console.log(miArray)
+
+        console.log('\n/* Pop */')
+        miArray = [1,2,3,4,5]
+        console.log(miArray)
+        miArray.pop()
+        console.log(miArray)
+        miArray.pop()
+        console.log(miArray)
+
+        console.log('\n/* Shift */')
+        miArray = [1,2,3,4,5]
+        console.log(miArray)
+        miArray.shift()
+        console.log(miArray)
+        miArray.shift()
+        console.log(miArray)
+
+        console.log('\n/* Join */')
+        console.log(texto2array)
+        let array2texto = texto2array.join('*')
+        console.log(array2texto)
+ 
+
+    </script>
+
+</body>
+</html>

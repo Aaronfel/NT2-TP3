@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Vue CDN</title>
+
+    <!-- bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+
+    <div id="app" class="container-fluid mt-3">
+        <div class="jumbotron">
+            <h1>Bienvenidos a Vue.js CDN</h1>
+            <hr>
+            <hr>
+
+            <!-- --------------------------------------------- -->
+            <!--            Directivas Data Binding            -->
+            <!-- --------------------------------------------- -->
+            <h2>Directivas Data Binding</h2>
+            <br>
+
+            <h4><u>Interpolación / v-text / v-html</u></h4>
+            <b>{{ 3 + 4 }}</b>
+            <div>{{ mensaje }}</div>
+            <div v-text="mensaje"></div>
+            <div v-html="mensaje"></div>
+            <br>
+            <div>{{ mensajeHTML }}</div>
+            <div v-text="mensajeHTML"></div>
+            <div v-html="mensajeHTML"></div>
+            <hr>
+
+            <h4><u>Property Binding / v-bind</u></h4>
+            <input type="text" value="123"><br>
+            <input type="text" value="valor"><br>
+            <input type="text" v-bind:value="valor"> {{valor}}<br>
+            <input type="text" :value="valor"> {{valor}}<br>
+            <hr>
+
+            <h4><u>Event Binding / v-on</u></h4>
+            <button class="btn btn-success my-3" v-on:click="contador++">Contar {{contador}}</button>
+            <button class="btn btn-warning my-3" @click="contador2++">Contar {{contador2}}</button>
+            <button class="btn btn-danger my-3" @click="incrementar()">Contar {{getContador()}}</button>
+            <hr>
+
+            <h4><u>Doble Data Binding / v-model</u></h4>
+
+            <h5>Manual</h5>
+            <input type="text" :value="valor2" @input="actualizar($event)"> {{valor2}}<br>
+
+            <h5>Automático</h5>
+            <input type="text" v-model="valor3"> {{valor3}}<br>
+
+            <hr>
+            <hr>
+
+            <!-- --------------------------------------------- -->
+            <!--            Directivas Estructurales           -->
+            <!-- --------------------------------------------- -->
+            <h2>Directivas Estructurales</h2>
+            <br>
+
+            <h4><u>v-if</u></h4>
+
+            <button class="btn btn-warning my-3" @click="mostrar=!mostrar">
+                {{ mostrar?'Ocultar':'Mostrar' }}
+            </button>
+            <p v-if="mostrar" class="alert alert-warning">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro iste harum eum est doloribus libero blanditiis omnis, possimus minima praesentium accusamus id magni similique aperiam maiores ducimus sequi dolorem dolor?
+            </p>
+            <p v-else class="alert alert-danger">
+            <!-- <p v-if="!mostrar" class="alert alert-danger"> -->
+                ELEMENTO REMOVIDO
+            </p>
+            <hr>
+
+            <h4><u>v-show</u></h4>
+
+            <button class="btn btn-info my-3" @click="mostrar2=!mostrar2">
+                {{ mostrar2?'Ocultar':'Mostrar' }}
+            </button>
+            <p v-show="mostrar2" class="alert alert-info">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro iste harum eum est doloribus libero blanditiis omnis, possimus minima praesentium accusamus id magni similique aperiam maiores ducimus sequi dolorem dolor?
+            </p>
+            <hr>
+
+            <h4><u>v-for</u></h4>
+            <br>
+            <ul>
+                <li v-for="(usuario,index) in usuarios">
+                    {{ index + 1 }} {{ usuario }}
+                </li>
+            </ul>
+            
+            <hr>
+
+            <button class="btn btn-warning my-3" @click="agregarAlumno()">Agregar Alumno</button>
+            <div v-if="alumnos.length">
+                <ul>
+                    <li v-for="(alumno, index) in alumnos">
+                        <!-- <pre>{{ index + 1}} - {{ alumno }}</pre> -->
+                        <!-- {{ alumno.nombre }} {{ alumno.apellido }} -->
+                        {{ alumno.nombre + ' ' + alumno.apellido }}
+                    </li>
+                </ul>
+
+                <br>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr class="bg-success text-white">
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Edad</th>
+                            <th>Curso</th>
+                            <th>Foto</th>
+                        </tr>
+                        <tr class="bg-info text-white" v-for="(alumno, index) in alumnos">
+                            <td>{{ alumno.nombre }}</td>
+                            <td>{{ alumno.apellido }}</td>
+                            <td>{{ alumno.edad }}</td>
+                            <td>{{ alumno.curso?'Si':'No' }}</td>
+                            <td>
+                                <img :src="alumno.foto" width="50" :alt="alumno.nombre">
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div class="alert alert-info">
+                        <!-- Mensaje ninguno hizo el curso -->
+                        <div v-if="calcularAlumnosCurso.ninguno">
+                            Ningun alumno hizo el curso
+                        </div>
+                        <!-- Mensaje todos hicieron el curso -->
+                        <div v-else-if="calcularAlumnosCurso.todos">
+                            Todos los alumnos hicieron el curso
+                        </div>
+                        <!-- Mensaje alguno hizo el curso -->
+                        <div v-else>
+                            {{calcularAlumnosCurso.cantidad}} {{calcularAlumnosCurso.uno?'alumno hizo':'alumnos hicieron'}} el curso, de un total de {{calcularAlumnosCurso.total}}
+                        </div>
+                    </div>
+
+                </div>
+
+                <br>
+
+                <div class="media alert alert-warning" v-for="(alumno, index) in alumnos">
+                    <img :src="alumno.foto" width="150" :alt="alumno.nombre">
+                    <div class="media-body ml-3">
+                        <h5><u>Alumno {{ index + 1}}</u></h5>
+                        <br>
+                        <p>Nombre: {{alumno.nombre}} {{alumno.apellido}}</p>
+                        <p>Edad: <i>{{alumno.edad}}</i></p>
+                        Hizo el curso <input type="checkbox" v-model="alumno.curso">
+                        <button class="btn btn-danger ml-3" @click="borrar(index)">Borrar</button>
+                    </div>
+                </div>
+            </div>
+            <h2 v-else class="alert alert-warning">
+                No se encontraron alumnos
+            </h2>
+
+            <hr>
+
+            <h4><u>v-if / v-else-if / v-else</u></h4>
+            <br>
+            <input type="text" v-model="nombre"><br>
+            <div class="btn btn-primary mt-3">
+                <div v-if="nombre.toLowerCase() == 'juan'">
+                    Bienvenido {{nombre}}
+                </div>
+                <div v-else-if="nombre.toLowerCase() == 'ana'">
+                    Bienvenida {{nombre}}
+                </div>
+                <div v-else-if="nombre.toLowerCase() == 'pedro'">
+                    Bienvenido {{nombre}}
+                </div>
+                <div v-else-if="nombre.length >=3">
+                    Hola {{nombre}}
+                </div>
+                <div v-else>
+                    Ingrese nombre
+                </div>
+            </div>
+
+            <hr>
+            <hr>
+
+            <!-- --------------------------------------------- -->
+            <!--            Directivas de Atributo             -->
+            <!-- --------------------------------------------- -->
+            <h2>Directivas de Atributo</h2>
+            <br>
+
+            <h4><u>:style</u></h4>
+
+            <button class="btn btn-info my-3" @click="estado1=!estado1">Cambiar</button>
+            <p :style="{color:'white', 'background-color':estado1?'green':'red', borderRadius: '10px', padding: '10px'}">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus perferendis a at corrupti porro, quos esse vitae amet nobis praesentium accusantium facilis veniam eveniet quibusdam in facere necessitatibus culpa! Quibusdam!
+            </p>
+
+            <h4><u>:class</u></h4>
+
+            <button class="btn btn-info my-3" @click="estado2=!estado2">Cambiar</button>
+            <!-- <p :class="{'text-white':true, 'bg-success': estado2, 'bg-danger': !estado2, 'p-2': true}"> -->
+            <p :class="['text-white', {'bg-success': estado2, 'bg-danger': !estado2}, 'p-2']">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus perferendis a at corrupti porro, quos esse vitae amet nobis praesentium accusantium facilis veniam eveniet quibusdam in facere necessitatibus culpa! Quibusdam!
+            </p>
+
+            <hr>
+            <hr>
+
+            <!-- --------------------------------------------- -->
+            <!--                 Componentes                   -->
+            <!-- --------------------------------------------- -->
+            <h2>Componentes</h2>
+            <br>
+
+            <contador init="123" color="danger"></contador>
+            <contador init="456" color="warning"></contador>
+            <contador init="789" color="success"></contador>
+
+        </div>
+    </div>
+
+
+    <!-- Vue.js CDN -->
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
